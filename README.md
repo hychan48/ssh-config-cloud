@@ -1,142 +1,170 @@
 # SSH Config Cloud
 Notes and templates for using SSH Config. KVM &amp; Hyper-V host to Windows &amp; Ubuntu with default NAT Tunneling
 
-How to access KVM / Hyper-V
-With SSH Config, tab completion<sup>[1](https://github.com/gianlucaborello/aws-ssh-config)</sup>
+<!-- table of contents essentially for now -->
+<!-- need to add in the content slowly, too much content -->
 
 
-# Setup SSH keys
+# General Provisioning
+* Hostname / Computer Name / VM Name
+1. User Accounts
+  * sudoers / root / admin
+2. SSH Server / Keys
+3. Networking
+  * DNS
+  * DHCP
+  * NAT
+  * Optional:
+    * Routing (only if multiple nics)
+      * metric in routing / gateway / rules
+      * kvm host hostname.
+    * VPN
+    * Firewall
+    - probably best to check and report device names
+* File Transfering
+  * curl
+  * wget
+  * scp
+  * rsync
+  * sftp
+  * croc github
+    * scoop / winget
+    * also blaze?
+  * might need to use clipboard typing for some
+  * mounting (look into read only - other special options)
+    * provided by kvm / hyper-v
+    * like create an iso type of thing
+    * brasero / gnome-disk-utility
+  <!-- * sshfs
+  * smb
+  * nfs
+  * ftp
+  * tftp
+  * http
+  * https
+  * git
+  * github
+  * gitlab
+  * bitbucket
+  * etc. -->
+* Remote Desktop
+* Check for Updates
+* https://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_11/amd64/fish_3.6.1-1_amd64.deb
+* auto install type of thing
+* package dependant, but opensuse has a certain naming convention
+
+# Development
 ```bash
-ssh-keygen -t ed25519
-
-# follow prompt
-# default
-
-echo ~/.id_ed25519
-echo ~/.id_ed25519.pub
-
-# Advanced
-# obscure the hostname
-ssh-keygen -t ed25519 -C "deb"
+# fish
+# 2. `-O` means write output to a local file named like the remote file we get (the URL in our case).
+# might need -L for redirect
+URL="https://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_11/amd64/fish_3.6.1-1_amd64.deb";
+curl -OL $URL && sudo dpkg -i $(basename $URL) && sudo apt-get install -f
+# had to run apt --fix-broken install
+# set default shell
+chsh -s /usr/bin/fish
+# xming? or mobaxterm
 ```
-
-# GitHub Public Keys
-`https://github.com/<username>.keys`
-`https://github.com/hychan48.keys`
-
-
 ```bash
-# Copy Pub keys from github
-mkdir -p ~/.ssh/
-chmod -R 600 ~/.ssh/
-```
-# on windows, ed25519 
+mklink /H "C:\Users\Jason\AppData\Roaming\MobaXterm\home\.ssh\config" "C:\Users\Jason\.ssh\config"
 
-# Ubuntu / Debian
-<!-- [a relative link](other_file.md) -->
+junction.exe "C:\Users\Jason\AppData\Roaming\MobaXterm\home\.ssh\config" "C:\Users\Jason\.ssh\config"
 
+# actually... maybe better to link the folders
+https://stackoverflow.com/questions/894430/creating-hard-and-soft-links-using-powershell
 
+cmd /c mklink /H "C:\Users\Jason\AppData\Roaming\MobaXterm\home\.ssh\config" "C:\Users\Jason\.ssh\config"
 
-# Setup SSH Keys
-<!-- [a relative link](other_file.md) -->
-
-
-# Generate Powershell
-* mshome.net (default)
-* 
-## Install SSH
-[Microsoft's Powershell Instructions](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse?tabs=powershell#install-openssh-for-windows)
-
-```ps1
-# Manually
-# https://github.com/PowerShell/Win32-OpenSSH/releases/latest
-# Download msi and run then run firewall rules. i.e.
-# Download Url... end as filename w/o parsing header
-# https://stackoverflow.com/a/44475621
-Function Get-Url {
-  param ( [parameter(position=0)]$uri )
-  invoke-webrequest -uri "$uri" -outfile $(split-path -path "$uri" -leaf)
-}
-Get-Url("https://github.com/PowerShell/Win32-OpenSSH/releases/download/v9.2.2.0p1-Beta/OpenSSH-Win32-v9.2.2.0.msi")
-msiexec /i path to OpenSSH-Win64-v9.2.2.0.msi
-#... firewall rules here
-
-
-```
-```ps1
-# misc
-Set-ExecutionPolicy -ExecutionPolicy Unrestricted -f
-Get-ExecutionPolicy
-
-# irm can use proxy
-irm get.scoop.sh -Proxy 'http://<ip:port>' | iex
-
-# https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/deploy-windows-on-a-vhd--native-boot?view=windows-11
-
-
-# for gen 1
-# https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/boot-to-vhd--native-boot--add-a-virtual-hard-disk-to-the-boot-menu?view=windows-11
-Attach <vdisk>
-
-
-cd "D:\hyperV\ub1\Virtual Hard Disks"
-diskpart
-# create vdisk file="D:\hyperV\ub1\Virtual Hard Disks" maximum=25600 type=fixed
-select vdisk file="D:\hyperV\ub1\Virtual Hard Disks\ub1.vhdx"
-Attach vdisk
-
-# for existing.. i see 1
-# list partition
-select partition 3
-assign letter=v
-
-# dont think this applies to ubuntu... because it's not ntfs...
-msconfig.exe
-
-# msconfig.exe
-V:\
-cd v:\windows\system32
-bcdboot v:\windows /s S: /f UEFI
-
-
-# gen 1.. so
-bcdboot v:\windows /s S: /f UEFI
-
-
-
-V for Vm, S for System.
-
-list vdisk
-exit
-
-
-#
-Partition ###  Type              Size     Offset
-  -------------  ----------------  -------  -------
-  Partition 1    Unknown           1024 KB  1024 KB
-  Partition 2    Unknown           2048 MB  2048 KB
-  Partition 3    Unknown            124 GB  2050 MB
-
+# soft link is enough for mobaxterm / mabe link with cygwin as well
+# todo use env variables for reusability
+cmd /c mklink "C:\Users\Jason\AppData\Roaming\MobaXterm\home\.ssh\config" "C:\Users\Jason\.ssh\config"
 ```
 
-## WSL Debian
-* localdomain
-* 172.17.107.87/28
-* `hostnamectlr` fails
-# Generate Shell
 
-# Export Display
-```bash
-# SSH
-## Remember to use capital
-export DISPLAY=localhost:10.0 # ssh
-```
+# Tools
+# VNC
+* [RealVNC Viewer](https://www.realvnc.com/en/connect/download/viewer/)
+* [TightVNC](https://www.tightvnc.com/download.php)
 
-## Microsoft SysInternals
-[System Internals](https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite)
-* psexec
-* pskill
-* rdcman
-* autologon.exe
+# Development Utilities
+* [Visual Studio Code](https://code.visualstudio.com/)
+* [Visual Studio Code SSH](https://code.visualstudio.com/docs/remote/ssh)
+* SSH Config Man Page
+
+## Mac
+* VSCode
+<!-- * iTerm2? tmux? -->
+* Karabiner Elements
+* NoMachine
+<!-- * TouchBarServer? -->
+
+## Linux
+<!-- todo add links -->
+* apt install inetutils-tools dnsutils -y
+  * comes with ping, traceroute, etc. dig, nslookup, etc.
+<!-- * nnmap? add docs -->
+<!-- * apt iproute2? or iputils-ping? -->
+* dig which is in dnsutils?
+* pingarp (arping)? / wireshark etc.
+* net-tools? (ifconfig) / iproute2? (ip)
+* zsh / fish
+  * fish is legit
+* ip addr show
+* ip route show
+* ip rule show
+* /etc/resolve.conf / systemd-resolve --status / resolvectl status (ub22+)
+* wget / curl
 
 
+### KVM
+* virsh auto-completion / alias etc.
+* xml editors / helpers
+* mamba / conda can be useful
+  * it's like a package manager made in python. not just for python
+  * also some other pipx or something
+
+### Hyper-V
+* AHK for clipboard typing. ctrl send is broken though for linux. but i have a script
+
+## Windows
+* cygwin? pacman? mobaxterm? moba is cygwin...
+  * rsync is in cygwin. but add manually
+    * also cygwin is isolated i believe. so need to copy files into it / junction
+  <!-- * bunch of net tools... interesting -->
+  <!-- * what is debuginfo? -->
+* VSCode / Pwsh Macro or other terminal for exiting ssh
+  * baincd.copy-path-unixstyle
+  * path extention converter. kinda like what i was making
+* OpenSSH Repo with installer
+* WinGet
+* SysInternals 
+  * pslist
+  * pskill
+  * tcpview
+  * autologon.exe
+  * psexec
+    * `query session` and other ways to get session id (-i 1) is common
+  * *acceptEula script*
+* VSCode shortcuts / macros and extentions
+* AHK
+* Task Scheduler Helper. github repo somewhere
+* Nirsoft
+  * NetworkInterfacesView.exe
+  * MultiMonitorTool.exe (For Multi-Monitor)
+  * RegFromApp.exe
+  * KeyBoardStateView.exe
+  * a lot more
+* Chromium Portable
+  * chocolatey / scoop to install
+  * to ensure it's portable / snapshot to doesnt break for testing
+
+
+
+## Windows UX
+* todo. maybe merge from other repo
+* defn. my Profiles.ps1 and SSH Config settings
+
+# Misc
+* 7zip
+* Everything 1.5.0.1248
+  * It's much faster than Windows Search

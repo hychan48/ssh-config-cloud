@@ -67,3 +67,7 @@ else
     echo "IPv4 is down"
 fi
 ```
+
+
+* why did i upload open-ssh to github?
+* should just link it with the release / mirror
