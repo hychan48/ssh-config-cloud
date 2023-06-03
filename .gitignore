@@ -1,2 +1,3 @@
 # ssh-config-cloud.code-workspace
 *.code-workspace
+src/debug_utils/vnc/scratch.ahk
