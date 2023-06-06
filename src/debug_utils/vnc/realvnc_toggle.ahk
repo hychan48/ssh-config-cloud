@@ -45,26 +45,34 @@ Persistent 1
 ; ctrl + alt + shift + r
 ; <!^+r::toggleVncViewer()
 <!<^<+r::toggleVncViewer() ; this works. i was typing wrong key combo
-; F1::toggleVncViewer() ; this works...
+F1::toggleVncViewer() ; this works...
+F3::Reload ; this works...
+F4::ExitApp ;
 return
 toggleVncViewer(){
+    Tooltip ""
     if !WinExist("- Properties ahk_exe vncviewer.exe"){
+        ; dont need to activate... that was for dev
         ; Properties already open
-        WinActivate("- VNC Viewer ahk_exe vncviewer.exe")
-        ; Send "{F8}o" ; f8 is toggle, o is for options / properties
-        ControlSend("{F8}o",,'A')
+        ; WinActivate("- VNC Viewer ahk_exe vncviewer.exe")
+        ; WinWaitActive(,,5)
+        Send "{F8}o" ; f8 is toggle, o is for options / properties
+        ; ControlSend("{F8}o",,'A') ; control send doesnt always work it seems
     }else{
         WinActivate("- Properties ahk_exe vncviewer.exe")
     }
-    WinWaitActive("- Properties ahk_exe vncviewer.exe")
+    WinWait("- Properties ahk_exe vncviewer.exe",,5)
+    WinActivate("- Properties ahk_exe vncviewer.exe")
+    WinWaitActive("- Properties ahk_exe vncviewer.exe",,5)
     vncviewerEl := UIA.ElementFromHandle("- Properties ahk_exe vncviewer.exe")
     toggleReadOnlyEl := vncviewerEl.ElementFromPath("YYYYYYRY2") ; toggle checkmark for view only
     toggleReadOnlyEl.Toggle() ; Toggle checkmark
     toggleState := toggleReadOnlyEl.ToggleState ; Get state of checkmark
     vncviewerEl.ElementFromPath("YY/0").Invoke()
-    
-    
-    tooltip "Toggle State is " toggleState ? "View mode" : "Interactive mode" ; 1 : 0
+   WinActivate("- VNC Viewer ahk_exe vncviewer.exe")
+    ; weird ti's reversed now?
+    textToggleState := !toggleState ? "View mode" : "Interactive mode" ; 1 : 0
+    tooltip "Toggle State is " textToggleState
     ; to be real adament. it should check the tooltip before turning off
     SetTimer(tooltip, -3000) ; i dont like this, but it works for now
     return
