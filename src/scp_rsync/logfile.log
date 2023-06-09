@@ -1,180 +1,25 @@
-/root/tmp
-└── a
-    └── a1
-        └── a2
-            └── a3
-                └── a4.txt
-
-4 directories, 1 file
-OK
-OK
-/root/tmp
-└── a
-    └── a1
-        └── a2
-            └── a3
-                └── a4.txt
-
-4 directories, 1 file
-OK
-OK
-/root/tmp
-└── a
-    └── a1
-        └── a2
-            └── a3
-                └── a4.txt
-
-4 directories, 1 file
-OK
-OK
-/root/tmp
-└── a
-    └── a1
-        └── a2
-            └── a3
-                └── a4.txt
-
-4 directories, 1 file
-OK
-OK
-/root/tmp
-└── a
-    └── a
-        └── a1
-            └── a2
-                └── a3
-                    └── a4.txt
-
-5 directories, 1 file
-ERROR
-OK
-/root/tmp
-└── a
-    └── a
-        └── a1
-            └── a2
-                └── a3
-                    └── a4.txt
-
-5 directories, 1 file
-ERROR
-OK
-/root/tmp [error opening dir]
-
-0 directories, 0 files
-ERROR
-OK
-/root/tmp [error opening dir]
-
-0 directories, 0 files
-ERROR
-OK
-/root/tmp
-└── a
-    └── a1
-        └── a2
-            └── a3
-                └── a4.txt
-
-4 directories, 1 file
-OK
-OK
-/root/tmp
-└── a
-    └── a1
-        └── a2
-            └── a3
-                └── a4.txt
-
-4 directories, 1 file
-OK
-OK
-/root/tmp [error opening dir]
-
-0 directories, 0 files
-ERROR
-OK
-/root/tmp [error opening dir]
-
-0 directories, 0 files
-ERROR
-OK
-/root/tmp
-└── a
-    └── a1
-        └── a2
-            └── a3
-                └── a4.txt
-
-4 directories, 1 file
-OK
-OK
-/root/tmp
-└── a
-    └── a1
-        └── a2
-            └── a3
-                └── a4.txt
-
-4 directories, 1 file
-OK
-OK
-/root/tmp [error opening dir]
-
-0 directories, 0 files
-ERROR
-OK
-/root/tmp [error opening dir]
-
-0 directories, 0 files
-ERROR
-OK
-/root/tmp
-
-0 directories, 0 files
-ERROR
-OK
-/root/tmp
-└── a
-    └── a1
-        └── a2
-            └── a3
-                └── a4.txt
-
-4 directories, 1 file
-OK
-OK
-/root/tmp [error opening dir]
-
-0 directories, 0 files
-ERROR
-OK
-/root/tmp [error opening dir]
-
-0 directories, 0 files
-ERROR
-OK
-/root/tmp
-└── a
-    └── a1
-        └── a2
-            └── a3
-                └── a4.txt
-
-4 directories, 1 file
-OK
-OK
-/root/tmp
-└── a
-    └── a1
-        └── a2
-            └── a3
-                └── a4.txt
-
-4 directories, 1 file
-OK
-OK
+#--------------------------------------------------
+DExists: ~/tmp: (mkdir -p ~/tmp;cd ~/tmp;cp -r ~/a .)
+OK: (mkdir -p ~/tmp;cd ~/tmp;cp -r ~/a .)
+OK: (mkdir -p ~/tmp;cd ~/tmp;cp -r ~/a .)
+DNE   : ~/tmp : (mkdir -p ~/tmp;cd ~/tmp;cp -r ~/a .)
+OK: (mkdir -p ~/tmp;cd ~/tmp;cp -r ~/a .)
+OK: (mkdir -p ~/tmp;cd ~/tmp;cp -r ~/a .)
+#--------------------------------------------------
+#--------------------------------------------------
+DExists: ~/tmp: rsync -a ~/a localhost:~/tmp
+OK: rsync -a ~/a localhost:~/tmp
+OK: rsync -a ~/a localhost:~/tmp
+DNE   : ~/tmp : rsync -a ~/a localhost:~/tmp
+OK: rsync -a ~/a localhost:~/tmp
+OK: rsync -a ~/a localhost:~/tmp
+#--------------------------------------------------
+#--------------------------------------------------
+DExists: ~/tmp: scp -r ~/a localhost:~/tmp
+OK: scp -r ~/a localhost:~/tmp
+OK: scp -r ~/a localhost:~/tmp
+DNE   : ~/tmp : scp -r ~/a localhost:~/tmp
+ERROR: scp -r ~/a localhost:~/tmp
 /root/tmp
 └── a1
     └── a2
@@ -182,8 +27,7 @@ OK
             └── a4.txt
 
 3 directories, 1 file
-ERROR
-ERROR
+ERROR: scp -r ~/a localhost:~/tmp
 /root/tmp
 ├── a
 │   └── a1
@@ -196,161 +40,72 @@ ERROR
             └── a4.txt
 
 7 directories, 2 files
-OK
-ERROR
+#--------------------------------------------------
+#--------------------------------------------------
+DExists: ~/tmp: (mkdir -p ~/tmp;cd ~/tmp;scp -r remotehost:~/a .)
+OK: (mkdir -p ~/tmp;cd ~/tmp;scp -r remotehost:~/a .)
+OK: (mkdir -p ~/tmp;cd ~/tmp;scp -r remotehost:~/a .)
+DNE   : ~/tmp : (mkdir -p ~/tmp;cd ~/tmp;scp -r remotehost:~/a .)
+OK: (mkdir -p ~/tmp;cd ~/tmp;scp -r remotehost:~/a .)
+OK: (mkdir -p ~/tmp;cd ~/tmp;scp -r remotehost:~/a .)
+#--------------------------------------------------
+#--------------------------------------------------
+DExists: ~/tmp: rsync -a ~/a localhost:~/tmp
+OK: rsync -a ~/a localhost:~/tmp
+OK: rsync -a ~/a localhost:~/tmp
+DNE   : ~/tmp : rsync -a ~/a localhost:~/tmp
+OK: rsync -a ~/a localhost:~/tmp
+OK: rsync -a ~/a localhost:~/tmp
+#--------------------------------------------------
+#--------------------------------------------------
+DExists: ~/tmp: rsync -a ~/a localhost:~/tmp/x
+ERROR: rsync -a ~/a localhost:~/tmp/x
 /root/tmp
-└── a
-    └── a1
-        └── a2
-            └── a3
-                └── a4.txt
+└── x
+    └── a
+        └── a1
+            └── a2
+                └── a3
+                    └── a4.txt
 
-4 directories, 1 file
-OK
-OK
+5 directories, 1 file
+ERROR: rsync -a ~/a localhost:~/tmp/x
 /root/tmp
-└── a
-    ├── a
-    │   └── a1
-    │       └── a2
-    │           └── a3
-    │               └── a4.txt
-    └── a1
-        └── a2
-            └── a3
-                └── a4.txt
+└── x
+    └── a
+        └── a1
+            └── a2
+                └── a3
+                    └── a4.txt
 
-8 directories, 2 files
-OK
-OK
+5 directories, 1 file
+DNE   : ~/tmp : rsync -a ~/a localhost:~/tmp/x
+ERROR: rsync -a ~/a localhost:~/tmp/x
 /root/tmp [error opening dir]
 
 0 directories, 0 files
-ERROR
-OK
+ERROR: rsync -a ~/a localhost:~/tmp/x
 /root/tmp [error opening dir]
 
 0 directories, 0 files
-ERROR
-OK
-/root/tmp
-└── a
-    └── a1
-        └── a2
-            └── a3
-                └── a4.txt
-
-4 directories, 1 file
-OK
-OK
-/root/tmp
-└── a
-    ├── a
-    │   └── a1
-    │       └── a2
-    │           └── a3
-    │               └── a4.txt
-    └── a1
-        └── a2
-            └── a3
-                └── a4.txt
-
-8 directories, 2 files
-OK
-OK
-/root/tmp [error opening dir]
-
-0 directories, 0 files
-ERROR
-OK
-/root/tmp [error opening dir]
-
-0 directories, 0 files
-ERROR
-OK
-/root/tmp
-└── a
-    └── a1
-        └── a2
-            └── a3
-                └── a4.txt
-
-4 directories, 1 file
-OK
-OK
-/root/tmp
-└── a
-    ├── a
-    │   └── a1
-    │       └── a2
-    │           └── a3
-    │               └── a4.txt
-    └── a1
-        └── a2
-            └── a3
-                └── a4.txt
-
-8 directories, 2 files
-OK
-OK
-/root/tmp [error opening dir]
-
-0 directories, 0 files
-ERROR
-OK
-/root/tmp [error opening dir]
-
-0 directories, 0 files
-ERROR
-OK
+#--------------------------------------------------
+#--------------------------------------------------
+DExists: ~/tmp: rsync -a ~/a localhost:~/tmp/x/y
+ERROR: rsync -a ~/a localhost:~/tmp/x/y
 /root/tmp
 
 0 directories, 0 files
-ERROR
-OK
-/root/tmp
-└── a
-    ├── a
-    │   └── a1
-    │       └── a2
-    │           └── a3
-    │               └── a4.txt
-    └── a1
-        └── a2
-            └── a3
-                └── a4.txt
-
-8 directories, 2 files
-OK
-OK
-/root/tmp [error opening dir]
-
-0 directories, 0 files
-ERROR
-OK
-/root/tmp [error opening dir]
-
-0 directories, 0 files
-ERROR
-OK
-Expected to Fail
+ERROR: rsync -a ~/a localhost:~/tmp/x/y
 /root/tmp
 
 0 directories, 0 files
-ERROR
-OK
-/root/tmp
-
-0 directories, 0 files
-ERROR
-OK
+DNE   : ~/tmp : rsync -a ~/a localhost:~/tmp/x/y
+ERROR: rsync -a ~/a localhost:~/tmp/x/y
 /root/tmp [error opening dir]
 
 0 directories, 0 files
-ERROR
-OK
+ERROR: rsync -a ~/a localhost:~/tmp/x/y
 /root/tmp [error opening dir]
 
 0 directories, 0 files
-ERROR
-OK
+#--------------------------------------------------
