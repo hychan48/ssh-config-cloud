@@ -1,281 +1,87 @@
 #!/bin/zsh
 # Initialize Folders
+# todo reset folder per run as well... to try more risky stuff.
 function InitializeDummyFolders(){
     mkdir -p ~/a/a1/a2/a3
-    # mkdir -p ~/b/b1/b2/b3
     touch ~/a/a1/a2/a3/a4.txt
-    # touch ~/b/b1/b2/b3/b4.txt
     tree ~/a
-    # tree ~/b
 }
 InitializeDummyFolders
-# echo and log to file. use less for console coloring or highlight or bat (better cat)
-# vscode doesnt need the script -efq -c...
 function logecho() {
     echo "$@" | tee -a logfile.log
+    # echo -e "\e[32mOK\e[0m" # green ok
+
 }
 rm -f logfile.log
 
-# should maybe tee? i just want to count to verify
-# Want to copy ~/a to ~/tmp/a or just use realpath
-# https://linux.die.net/man/1/test
-# stdbuf  to persist color
+# input is the cmd to run multiple times
 function printAndEvaluateDestinationDir(){
-    # script -efq -c "tree ~/tmp" | tee -a logfile.log
-    tree ~/tmp | tee -a logfile.log
-    test -e ~/tmp/a/a1/a2/a3/a4.txt && logecho "OK" ||logecho "ERROR" # good
-    test -e ~/tmp/a1/a2/a3/a4.txt && logecho "ERROR" || logecho "OK" # bad
+    # log tree (maybe can hide)
+    tree ~/tmp | tee -a logfile.log | grep "4 directories, 1 file" && logecho "OK: "$1 ||(logecho "ERROR: "$1)
+    # fixme... maybe only print tree if error or dont print at all
 }
-# maybe have expected fail and expected pass
-# unalias recreateDestinationDir
-# unalias rmDestinationDir
 alias recreateDestinationDir='rm -rf ~/tmp && mkdir ~/tmp'
 alias rmDestinationDir='rm -rf ~/tmp'
-# can consolidate these into a function. this is more verbose
-#--------------------------------------------------
-# recreateDestinationDir
-# One
-recreateDestinationDir
-rsync -a ~/a ~/tmp
-printAndEvaluateDestinationDir
-# Two
-recreateDestinationDir
-rsync -a ~/a ~/tmp
-rsync -a ~/a ~/tmp
-printAndEvaluateDestinationDir
-# rmDestinationDir
-# One
-rmDestinationDir
-rsync -a ~/a ~/tmp
-printAndEvaluateDestinationDir
-# Two
-rmDestinationDir
-rsync -a ~/a ~/tmp
-rsync -a ~/a ~/tmp
-printAndEvaluateDestinationDir
-#--------------------------------------------------
-#--------------------------------------------------
-# recreateDestinationDir
-# One
-recreateDestinationDir
-rsync -a ~/a ~/tmp/a
-printAndEvaluateDestinationDir
-# Two
-recreateDestinationDir
-rsync -a ~/a ~/tmp/a
-rsync -a ~/a ~/tmp/a
-printAndEvaluateDestinationDir
-# rmDestinationDir
-# One
-rmDestinationDir
-rsync -a ~/a ~/tmp/a
-printAndEvaluateDestinationDir
-# Two
-rmDestinationDir
-rsync -a ~/a ~/tmp/a
-rsync -a ~/a ~/tmp/a
-printAndEvaluateDestinationDir
-#--------------------------------------------------
-#--------------------------------------------------
-# recreateDestinationDir
-# One
-recreateDestinationDir
-rsync -a ~/a/ ~/tmp/a
-printAndEvaluateDestinationDir
-# Two
-recreateDestinationDir
-rsync -a ~/a/ ~/tmp/a
-rsync -a ~/a/ ~/tmp/a
-printAndEvaluateDestinationDir
-# rmDestinationDir
-# One
-rmDestinationDir
-rsync -a ~/a/ ~/tmp/a
-printAndEvaluateDestinationDir
-# Two
-rmDestinationDir
-rsync -a ~/a/ ~/tmp/a
-rsync -a ~/a/ ~/tmp/a
-printAndEvaluateDestinationDir
-#--------------------------------------------------
-#--------------------------------------------------
-# recreateDestinationDir
-# One
-recreateDestinationDir
-rsync -a ~/a/ ~/tmp/a
-printAndEvaluateDestinationDir
-# Two
-recreateDestinationDir
-rsync -a ~/a/ ~/tmp/a
-rsync -a ~/a/ ~/tmp/a
-printAndEvaluateDestinationDir
-# rmDestinationDir
-# One
-rmDestinationDir
-rsync -a ~/a/ ~/tmp/a
-printAndEvaluateDestinationDir
-# Two
-rmDestinationDir
-rsync -a ~/a/ ~/tmp/a
-rsync -a ~/a/ ~/tmp/a
-printAndEvaluateDestinationDir
-#--------------------------------------------------
-#--------------------------------------------------
-# recreateDestinationDir
-# One
-recreateDestinationDir
-scp -a ~/a/ ~/tmp
-printAndEvaluateDestinationDir
-# Two
-recreateDestinationDir
-rsync -a ~/a/ ~/tmp/a
-rsync -a ~/a/ ~/tmp/a
-printAndEvaluateDestinationDir
-# rmDestinationDir
-# One
-rmDestinationDir
-rsync -a ~/a/ ~/tmp/a
-printAndEvaluateDestinationDir
-# Two
-rmDestinationDir
-rsync -a ~/a/ ~/tmp/a
-rsync -a ~/a/ ~/tmp/a
-printAndEvaluateDestinationDir
-#--------------------------------------------------
 
+
+function expectedToPass(){
+    local copycmd="$1" # 'rsync -r ~/a ~/tmp'
+    #--------------------------------------------------
+    logecho "#--------------------------------------------------"
+    logecho "copycmd: "$copycmd
+    # recreateDestinationDir
+    # One
+    recreateDestinationDir
+    eval $copycmd # rsync -a ~/a ~/tmp
+    printAndEvaluateDestinationDir $copycmd
+    # Two
+    recreateDestinationDir
+    eval $copycmd # rsync -a ~/a ~/tmp
+    eval $copycmd # rsync -a ~/a ~/tmp
+    printAndEvaluateDestinationDir $copycmd
+    # rmDestinationDir
+    # One
+    rmDestinationDir
+    eval $copycmd # rsync -a ~/a ~/tmp
+    printAndEvaluateDestinationDir $copycmd
+    # Two
+    rmDestinationDir
+    eval $copycmd # rsync -a ~/a ~/tmp
+    eval $copycmd # rsync -a ~/a ~/tmp
+    printAndEvaluateDestinationDir $copycmd
+    logecho "#--------------------------------------------------"
+    #--------------------------------------------------
+
+}
+# Rsync
+expectedToPass 'rsync -a ~/a ~/tmp'
+expectedToPass 'rsync -a ~/a ~/tmp/a'
+expectedToPass 'rsync -a ~/a/ ~/tmp/a'
+expectedToPass 'rsync -a ~/a/ ~/tmp/a'
 # SCP
-#--------------------------------------------------
-# recreateDestinationDir
-# One
-recreateDestinationDir
-scp -r ~/a ~/tmp
-printAndEvaluateDestinationDir
-# Two
-recreateDestinationDir
-scp -r ~/a ~/tmp
-scp -r ~/a ~/tmp
-printAndEvaluateDestinationDir
-# rmDestinationDir
-# One
-rmDestinationDir
-scp -r ~/a ~/tmp
-printAndEvaluateDestinationDir
-# Two
-rmDestinationDir
-scp -r ~/a ~/tmp
-scp -r ~/a ~/tmp
-printAndEvaluateDestinationDir
-#--------------------------------------------------
-#--------------------------------------------------
-# recreateDestinationDir
-# One
-recreateDestinationDir
-scp -r ~/a ~/tmp/a
-printAndEvaluateDestinationDir
-# Two
-recreateDestinationDir
-scp -r ~/a ~/tmp/a
-scp -r ~/a ~/tmp/a
-printAndEvaluateDestinationDir
-# rmDestinationDir
-# One
-rmDestinationDir
-scp -r ~/a ~/tmp/a
-printAndEvaluateDestinationDir
-# Two
-rmDestinationDir
-scp -r ~/a ~/tmp/a
-scp -r ~/a ~/tmp/a
-printAndEvaluateDestinationDir
-#--------------------------------------------------
-#--------------------------------------------------
-# recreateDestinationDir
-# One
-recreateDestinationDir
-scp -r ~/a/ ~/tmp/a
-printAndEvaluateDestinationDir
-# Two
-recreateDestinationDir
-scp -r ~/a/ ~/tmp/a
-scp -r ~/a/ ~/tmp/a
-printAndEvaluateDestinationDir
-# rmDestinationDir
-# One
-rmDestinationDir
-scp -r ~/a/ ~/tmp/a
-printAndEvaluateDestinationDir
-# Two
-rmDestinationDir
-scp -r ~/a/ ~/tmp/a
-scp -r ~/a/ ~/tmp/a
-printAndEvaluateDestinationDir
-#--------------------------------------------------
-#--------------------------------------------------
-# recreateDestinationDir
-# One
-recreateDestinationDir
-scp -r ~/a/ ~/tmp/a
-printAndEvaluateDestinationDir
-# Two
-recreateDestinationDir
-scp -r ~/a/ ~/tmp/a
-scp -r ~/a/ ~/tmp/a
-printAndEvaluateDestinationDir
-# rmDestinationDir
-# One
-rmDestinationDir
-scp -r ~/a/ ~/tmp/a
-printAndEvaluateDestinationDir
-# Two
-rmDestinationDir
-scp -r ~/a/ ~/tmp/a
-scp -r ~/a/ ~/tmp/a
-printAndEvaluateDestinationDir
-#--------------------------------------------------
-#--------------------------------------------------
-# recreateDestinationDir
-# One
-recreateDestinationDir
-scp -a ~/a/ ~/tmp
-printAndEvaluateDestinationDir
-# Two
-recreateDestinationDir
-scp -r ~/a/ ~/tmp/a
-scp -r ~/a/ ~/tmp/a
-printAndEvaluateDestinationDir
-# rmDestinationDir
-# One
-rmDestinationDir
-scp -r ~/a/ ~/tmp/a
-printAndEvaluateDestinationDir
-# Two
-rmDestinationDir
-scp -r ~/a/ ~/tmp/a
-scp -r ~/a/ ~/tmp/a
-printAndEvaluateDestinationDir
-#--------------------------------------------------
-
+expectedToPass 'scp -a ~/a/ ~/tmp'
+expectedToPass 'scp -r ~/a ~/tmp'
+expectedToPass 'scp -r ~/a ~/tmp/a'
+expectedToPass 'scp -r ~/a/ ~/tmp/a'
+expectedToPass 'scp -r ~/a/ ~/tmp/a'
+expectedToPass 'scp -r ~/a/ ~/tmp/a'
+expectedToPass 'scp -r ~/a/ ~/tmp'
+# Probably fails:
 
 logecho "Expected to Fail" # todo replace function
-#--------------------------------------------------
-# recreateDestinationDir
-# One
-recreateDestinationDir
-rsync -a ~/a ~/tmp/dest/a
-printAndEvaluateDestinationDir
-# Two
-recreateDestinationDir
-rsync -a ~/a ~/tmp/dest/a
-rsync -a ~/a ~/tmp/dest/a
-printAndEvaluateDestinationDir
-# rmDestinationDir
-# One
-rmDestinationDir
-rsync -a ~/a ~/tmp/dest/a
-printAndEvaluateDestinationDir
-# Two
-rmDestinationDir
-rsync -a ~/a ~/tmp/dest/a
-rsync -a ~/a ~/tmp/dest/a
-printAndEvaluateDestinationDir
-#--------------------------------------------------
+expectedToPass 'rsync -a ~/a ~/tmp/dest/a' # no comment fails...
+
+
+expectedToPass 'rsync -a ~/a ~/tmp' # adding ~... w
+expectedToPass 'rsync -a ~/a ~/tmp'
+tree ~/tmp
+tree ~/a
+
+echo "green red" | grep --color=always -E "green|red" | sed -E 's/green/OK/g; s/red/Error/g' #
+echo "green red" | grep --color=always -E "green|$" | GREP_COLORS='mt=32;01' grep --color=always -E "red|$"
+echo "green red" | grep --color=always -E "green|$" | GREP_COLORS='mt=31;01' grep --color=always -E "red|$"
+echo "green red" | GREP_COLORS='mt=31;01' grep --color=always -E "green|$" | GREP_COLORS='mt=32;01' grep --color=always -E "red|$"
+echo "green red" | GREP_COLORS='mt=31;01' grep --color=always -E "green|$" | GREP_COLORS='mt=32;01' grep --color=always -E "red|$"
+
+# this one damn that's neat. but tee makes it useless
+echo "green red" | GREP_COLORS='mt=32;01' grep --color=always -E "green|$" | GREP_COLORS='mt=31;01' grep --color=always -E "red|$" | tee -a color.log
