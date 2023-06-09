@@ -1,0 +1,356 @@
+/root/tmp
+└── a
+    └── a1
+        └── a2
+            └── a3
+                └── a4.txt
+
+4 directories, 1 file
+OK
+OK
+/root/tmp
+└── a
+    └── a1
+        └── a2
+            └── a3
+                └── a4.txt
+
+4 directories, 1 file
+OK
+OK
+/root/tmp
+└── a
+    └── a1
+        └── a2
+            └── a3
+                └── a4.txt
+
+4 directories, 1 file
+OK
+OK
+/root/tmp
+└── a
+    └── a1
+        └── a2
+            └── a3
+                └── a4.txt
+
+4 directories, 1 file
+OK
+OK
+/root/tmp
+└── a
+    └── a
+        └── a1
+            └── a2
+                └── a3
+                    └── a4.txt
+
+5 directories, 1 file
+ERROR
+OK
+/root/tmp
+└── a
+    └── a
+        └── a1
+            └── a2
+                └── a3
+                    └── a4.txt
+
+5 directories, 1 file
+ERROR
+OK
+/root/tmp [error opening dir]
+
+0 directories, 0 files
+ERROR
+OK
+/root/tmp [error opening dir]
+
+0 directories, 0 files
+ERROR
+OK
+/root/tmp
+└── a
+    └── a1
+        └── a2
+            └── a3
+                └── a4.txt
+
+4 directories, 1 file
+OK
+OK
+/root/tmp
+└── a
+    └── a1
+        └── a2
+            └── a3
+                └── a4.txt
+
+4 directories, 1 file
+OK
+OK
+/root/tmp [error opening dir]
+
+0 directories, 0 files
+ERROR
+OK
+/root/tmp [error opening dir]
+
+0 directories, 0 files
+ERROR
+OK
+/root/tmp
+└── a
+    └── a1
+        └── a2
+            └── a3
+                └── a4.txt
+
+4 directories, 1 file
+OK
+OK
+/root/tmp
+└── a
+    └── a1
+        └── a2
+            └── a3
+                └── a4.txt
+
+4 directories, 1 file
+OK
+OK
+/root/tmp [error opening dir]
+
+0 directories, 0 files
+ERROR
+OK
+/root/tmp [error opening dir]
+
+0 directories, 0 files
+ERROR
+OK
+/root/tmp
+
+0 directories, 0 files
+ERROR
+OK
+/root/tmp
+└── a
+    └── a1
+        └── a2
+            └── a3
+                └── a4.txt
+
+4 directories, 1 file
+OK
+OK
+/root/tmp [error opening dir]
+
+0 directories, 0 files
+ERROR
+OK
+/root/tmp [error opening dir]
+
+0 directories, 0 files
+ERROR
+OK
+/root/tmp
+└── a
+    └── a1
+        └── a2
+            └── a3
+                └── a4.txt
+
+4 directories, 1 file
+OK
+OK
+/root/tmp
+└── a
+    └── a1
+        └── a2
+            └── a3
+                └── a4.txt
+
+4 directories, 1 file
+OK
+OK
+/root/tmp
+└── a1
+    └── a2
+        └── a3
+            └── a4.txt
+
+3 directories, 1 file
+ERROR
+ERROR
+/root/tmp
+├── a
+│   └── a1
+│       └── a2
+│           └── a3
+│               └── a4.txt
+└── a1
+    └── a2
+        └── a3
+            └── a4.txt
+
+7 directories, 2 files
+OK
+ERROR
+/root/tmp
+└── a
+    └── a1
+        └── a2
+            └── a3
+                └── a4.txt
+
+4 directories, 1 file
+OK
+OK
+/root/tmp
+└── a
+    ├── a
+    │   └── a1
+    │       └── a2
+    │           └── a3
+    │               └── a4.txt
+    └── a1
+        └── a2
+            └── a3
+                └── a4.txt
+
+8 directories, 2 files
+OK
+OK
+/root/tmp [error opening dir]
+
+0 directories, 0 files
+ERROR
+OK
+/root/tmp [error opening dir]
+
+0 directories, 0 files
+ERROR
+OK
+/root/tmp
+└── a
+    └── a1
+        └── a2
+            └── a3
+                └── a4.txt
+
+4 directories, 1 file
+OK
+OK
+/root/tmp
+└── a
+    ├── a
+    │   └── a1
+    │       └── a2
+    │           └── a3
+    │               └── a4.txt
+    └── a1
+        └── a2
+            └── a3
+                └── a4.txt
+
+8 directories, 2 files
+OK
+OK
+/root/tmp [error opening dir]
+
+0 directories, 0 files
+ERROR
+OK
+/root/tmp [error opening dir]
+
+0 directories, 0 files
+ERROR
+OK
+/root/tmp
+└── a
+    └── a1
+        └── a2
+            └── a3
+                └── a4.txt
+
+4 directories, 1 file
+OK
+OK
+/root/tmp
+└── a
+    ├── a
+    │   └── a1
+    │       └── a2
+    │           └── a3
+    │               └── a4.txt
+    └── a1
+        └── a2
+            └── a3
+                └── a4.txt
+
+8 directories, 2 files
+OK
+OK
+/root/tmp [error opening dir]
+
+0 directories, 0 files
+ERROR
+OK
+/root/tmp [error opening dir]
+
+0 directories, 0 files
+ERROR
+OK
+/root/tmp
+
+0 directories, 0 files
+ERROR
+OK
+/root/tmp
+└── a
+    ├── a
+    │   └── a1
+    │       └── a2
+    │           └── a3
+    │               └── a4.txt
+    └── a1
+        └── a2
+            └── a3
+                └── a4.txt
+
+8 directories, 2 files
+OK
+OK
+/root/tmp [error opening dir]
+
+0 directories, 0 files
+ERROR
+OK
+/root/tmp [error opening dir]
+
+0 directories, 0 files
+ERROR
+OK
+Expected to Fail
+/root/tmp
+
+0 directories, 0 files
+ERROR
+OK
+/root/tmp
+
+0 directories, 0 files
+ERROR
+OK
+/root/tmp [error opening dir]
+
+0 directories, 0 files
+ERROR
+OK
+/root/tmp [error opening dir]
+
+0 directories, 0 files
+ERROR
+OK
