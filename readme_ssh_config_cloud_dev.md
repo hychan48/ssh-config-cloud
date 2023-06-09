@@ -154,3 +154,18 @@ sudo xinit xcalc
 * autologon.exe
 
 
+# SSH Config Order - For Linux
+## Filesystem Hierarchy Standard (FHS).
+* Redhat / CentOS, Ubuntu / Debian, Arch (same for sshd, maybe different for others)
+* Alphanumeric Ordering
+  * Processes from 0 Z z
+  * 0, 1, 2, 3, ..., 9, A, B, C, ..., Y, Z, a, b, c, ..., y, z 
+  1. 01_BestPractices
+  2. 02_Overrides_01
+  3. 99_overrides_02.conf
+* common order is from /var/lib /etc /var/run
+
+## Open ssh 6.9 (2015)
+`~/.ssh/authorized_keys.d/`
+
+https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch05.html

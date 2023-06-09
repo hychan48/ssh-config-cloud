@@ -101,7 +101,7 @@ cmd /c mklink "C:\Users\Jason\AppData\Roaming\MobaXterm\home\.ssh\config" "C:\Us
 ## Linux
 <!-- todo add links -->
 * apt install inetutils-tools dnsutils -y
-  * comes with ping, traceroute, etc. dig, nslookup, etc.
+  * comes with ping, traceroute, etc. dig, nslookup, etc. nmap?
 <!-- * nnmap? add docs -->
 <!-- * apt iproute2? or iputils-ping? -->
 * dig which is in dnsutils?
