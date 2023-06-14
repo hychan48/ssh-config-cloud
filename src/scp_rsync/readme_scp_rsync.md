@@ -201,3 +201,28 @@ New-Item -Path "$HOME" -ItemType Directory -Force
 <!-- * ssh config is configured properly -->
 <!-- * ssh,rsync is configured propertly on both systems -->
 <!-- todo. check if rsync is required on both systems / cygwin-->
+
+
+# Folder Name Change
+* as of OpenSSH 9.0. scp uses sftp under the cover
+* Paramiko client as mentioned, is bundled with a sftp client
+* https://www.linuxadictos.com/en/openssh-9-0-llega-con-sftp-en-lugar-de-scp-mejoras-y-mas.html#:~:text=9%20on%20Linux%3F-,Main%20new%20features%20of%20OpenSSH%209.0,host%2C%20which%20creates%20security%20issues.
+    * scp 'deprecated' in favor of sftp
+* apparently curl can use sftp... interesting
+```bash
+# Renames rasa_deps to rasa / folder name was changed
+rsync -r '/home/rasa/rasa_deps/' {{@_host.loginprefix}}:/root/rasa # this works in rsync, note because the 
+
+# It's impossible in SCP to do it in one simple command - according to google
+## i think i agree
+# Next Best thing for us
+scp -r /home/rasa/rasa_deps/dependencies {{@_host.loginprefix}}:/root/rasa # this one works from trial an error
+```
+
+```yaml
+tmp:
+  - |
+    print('hi')
+    def tmp:
+      print('bla')
+```
