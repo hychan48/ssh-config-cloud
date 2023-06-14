@@ -7,7 +7,6 @@ set -e
 
 # generate id_25519 to default location if not exist
 mkdir -p ~/.ssh;ssh-keygen -t ed25519 -C "host1@deb1" -f ~/.ssh/id_ed25519 -N "" <<< n
-
 # check if sshpass is installed
 if ! command -v sshpass &> /dev/null
 then
@@ -46,15 +45,12 @@ fi
 # PUB_KEY=$(cat ~/.ssh/id_ed25519.pub);sshpass -p asdf ssh target1@localhost "mkdir -p ~/.ssh;echo $PUB_KEY >> ~/.ssh/authorized_keys"
 sshpass -p asdf ssh target1@localhost 'rm -rf ~/.ssh'
 # create if not exist
-PUB_KEY=$(cat ~/.ssh/id_ed25519.pub);sshpass -p asdf ssh target1@localhost "mkdir -p ~/.ssh; grep -q '$PUB_KEY' ~/.ssh/authorized_keys || (echo '$PUB_KEY' >> ~/.ssh/authorized_keys)"
-
+PUB_KEY=$(cat ~/.ssh/id_ed25519.pub);sshpass -p asdf ssh target1@localhost "mkdir -p ~/.ssh;grep -q \"$PUB_KEY\" ~/.ssh/authorized_keys || (echo \"$PUB_KEY\" >> ~/.ssh/authorized_keys)"
 
 # For testing
-sshpass -p asdf ssh target1@localhost
+# sshpass -p asdf ssh target1@localhost
 ssh target1@localhost "tree -a ~/.ssh"
 ssh target1@localhost "cat ~/.ssh/authorized_keys"
+sshpass -p asdf ssh target1@localhost "cat ~/.ssh/authorized_keys"
 
-# ssh -i ~/.ssh/id_ed25519 target1@localhost "tree -a ~/.ssh" # if custom key. must be in config
-# ssh -i ~/.ssh/id_ed25519_1 target1@localhost "tree -a ~/.ssh"
-# sshpass -p asdf ssh -i ~/.ssh/id_ed25519.pub target1@localhost "cat ~/
-
+# isnt usin curl like easier? curl is infact installed
