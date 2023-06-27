@@ -1,12 +1,18 @@
 #!/bin/bash
 # setup some misc directories
-
+# install-zsh.sh
 # https://www.cyberciti.biz/faq/linux-show-directory-structure-command-line/
 apt install tree
 # very useful utility...
 tree -d -L 1
 tree -d
 tree -f
+
+
+# oh my zsh
+apt install zsh -y
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
 
 
 # didnt work... weird
@@ -23,7 +29,13 @@ sh install.sh
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 # add to plugins. 
 nano ~/.zshrc
-
+# plugins=( 
+    # other plugins...
+    # zsh-autosuggestions
+# )
+# plugins=(git)
+# plugins=(git zsh-autosuggestions)
+sed -i 's/git,zsh-autosuggestions/git zsh-autosuggestions/' ~/.zshrc
 
 
 
