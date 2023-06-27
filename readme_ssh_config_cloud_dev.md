@@ -169,3 +169,13 @@ sudo xinit xcalc
 `~/.ssh/authorized_keys.d/`
 
 https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch05.html
+
+
+# KVM - use 
+https://libguestfs.org/virt-sysprep.1.html#:~:text=Virt%2Dsysprep%20can%20reset%20or,SSH%20keys%2C%20users%20or%20logos.
+virt-sysprep
+* removes keys and such... essentially making a base image for cloning?
+* interesting....
+* try tmr and see
+* im going to guess... using sysprep. before cloning might make sense...
+* 

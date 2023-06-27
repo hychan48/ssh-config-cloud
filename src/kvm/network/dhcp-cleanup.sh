@@ -1,9 +1,25 @@
 #!/bin/bash
 # currently has 5...
 # restarting seems easiest...
+exit 0
+
+# Confirm files
+tree /var/lib/libvirt/dnsmasq/
+cat /var/lib/libvirt/dnsmasq/virbr0.macs # comes back on vm start
+cat /var/lib/libvirt/dnsmasq/virbr0.status # updates when net-start
+rm /var/lib/libvirt/dnsmasq/virbr0*
+virsh net-dhcp-leases default # totally misalligned...
+
 virsh net-destroy --network default
 virsh net-start --network default
 virsh net-dhcp-leases default
+
+# nano - can add hostname here...
+# kvm will always python dependency... especially with virt-manager
+virsh net-edit default
+:`
+<network />
+`
 # get rid of that other file... why is it still there?
 
 apt install nmap -y
