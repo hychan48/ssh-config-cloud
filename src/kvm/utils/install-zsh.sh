@@ -2,10 +2,12 @@
 apt update
 dpkg -l | grep -qw zsh || sudo apt-get install -y zsh
 dpkg -l | grep -qw curl || sudo apt-get install -y curl
-dpkg -l | grep -qw git || sudo apt-get install -y git
+dpkg -l | grep -qw "ii  git" || sudo apt-get install -y git
 
 #oh my zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"<<<
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"<<<"n"
+# sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"<<<"y"
 # y/n here ... todo
 
 # zsh-suggestions plugin
