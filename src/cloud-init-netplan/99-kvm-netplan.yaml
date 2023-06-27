@@ -6,3 +6,6 @@ network:
       match:
         name: en*
       dhcp4: true
+      dhcp-identifier: mac # means use mac address as dhcp id
+      # else it will use /etc/machine-id, which would require using sys-prep
+      # and adding back sshd keys... arg

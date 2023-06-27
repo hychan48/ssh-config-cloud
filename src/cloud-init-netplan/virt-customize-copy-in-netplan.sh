@@ -4,6 +4,12 @@
 echo "network: {config: disabled}" > "99-disable-network-config.cfg"
 virt-customize -d ub2 --copy-in ./99-kvm-netplan.yaml:/etc/netplan/
 virt-customize -d ub2 --copy-in ./99-disable-network-config.cfg:/etc/cloud/cloud.cfg.d
+virt-customize -d ub2 --copy-in ./99-disable-network-config.cfg:/etc/cloud/cloud.cfg.d
+
+virt-customize -a /mnt/vdishare/VirtDriverV2/rasa_vdishare/deps_copy/vm-lnx/cloud-init-qcow2s/ub2.qcow2 --copy-in ./99-disable-network-config.cfg:/etc/cloud/cloud.cfg.d
+virt-customize -a /mnt/vdishare/VirtDriverV2/rasa_vdishare/deps_copy/vm-lnx/cloud-init-qcow2s/ub2.qcow2 --copy-in ./99-kvm-netplan.yaml:/etc/netplan/
+virt-customize -a /mnt/vdishare/VirtDriverV2/rasa_vdishare/deps_copy/vm-lnx/cloud-init-qcow2s/ub2.qcow2 --delete /etc/netplan/50-cloud-init.yaml
+
 
 # https://netplan.readthedocs.io/en/stable/netplan-yaml/#properties-for-physical-device-types
 
