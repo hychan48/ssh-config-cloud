@@ -71,7 +71,7 @@ wsl.exe --unregister ub22 # removes the vmdx...
 ```powershell 
 wsl.exe --list --verbose
 ```
-```log [name-state-version.log]
+```txt [name-state-version.log]
   NAME                   STATE           VERSION
 * docker-desktop-data    Stopped         2
   Ubuntu-22.04           Stopped         2

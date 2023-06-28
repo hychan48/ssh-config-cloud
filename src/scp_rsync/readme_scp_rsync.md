@@ -132,7 +132,7 @@ scp -r $HOME/a win11:'$HOME/tmp'
 scp -r $HOME/a win11:'$HOME/tmp' # and again
 ssh win11 'Get-ChildItem -Path "$HOME/tmp" -Recurse -ErrorAction Stop | Select-Object -Property FullName -First 10'
 ```
-```log
+```txt
 FullName
 --------
 C:\Users\Administrator\tmp\a

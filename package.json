@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "docs:preview": "vitepress preview docs",
+    "ghPagesDeploy": "node docs/lib/gh-pages-push/ghPagesDeploy.mjs"
   },
   "keywords": [
     "kvm",
@@ -20,6 +21,7 @@
   "author": "hychan48",
   "license": "GPLv3",
   "devDependencies": {
+    "gh-pages": "^5.0.0",
     "vitepress": "1.0.0-beta.3"
   }
 }
