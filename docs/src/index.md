@@ -8,11 +8,11 @@ hero:
   tagline: My great project tagline
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: WSL
+      link: /WSL/
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: VitePress Docs
+      link: /vitePress/
 
 features:
   - title: Feature A

@@ -1,6 +1,8 @@
 # SSH Config Cloud
 Notes and templates for using SSH Config. KVM &amp; Hyper-V host to Windows &amp; Ubuntu with default NAT Tunneling
 
+ * [Searchable Docs](https://hychan48.github.io/ssh-config-cloud/)
+
 <!-- table of contents essentially for now -->
 <!-- need to add in the content slowly, too much content -->
 

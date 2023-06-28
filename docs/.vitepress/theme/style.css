@@ -2,7 +2,10 @@
  * Customize default theme styling by overriding CSS variables:
  * https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css
  */
-
+/*body {*/
+/*  background-color: #000000; !* substitute with the color of your choice *!*/
+/*  transition: background-color 0.5s; !* optional *!*/
+/*}*/
 /**
  * Colors
  * -------------------------------------------------------------------------- */
