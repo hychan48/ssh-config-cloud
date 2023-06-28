@@ -1,0 +1,1 @@
+import{_ as s,o as a,c as n,V as e}from"./chunks/framework.f2b6412b.js";const _=JSON.parse('{"title":"OpenSSH","description":"","frontmatter":{},"headers":[],"relativePath":"ssh/index.md","filePath":"ssh/index.md"}'),o={name:"ssh/index.md"},l=e("",4),t=[l];function p(r,c,i,d,C,h){return a(),n("div",null,t)}const D=s(o,[["render",p]]);export{_ as __pageData,D as default};
