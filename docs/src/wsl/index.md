@@ -85,18 +85,12 @@ wsl.exe --list --all
 ```
 :::
 
-# maybe rm...
-wsl.exe --import ub_clone C:\Users\hoyachan\ub_clone ub22.bak.tar
-wsl.exe --import ub_clone1 C:\Users\hoyachan\ub_clone1 ub22.bak.tar
-
-
-## Duplciate WSL
+## Duplicate WSL
 ```powershell [duplicate-vm.ps1]
 wsl.exe --install 'Ubuntu-22.04'
 
 wsl.exe --export 'Ubuntu-22.04' ub22.tar
 wsl.exe --import ub22-1 $HOME/ub22-1 "ub22.tar"
-
 
 # vhdx
 wsl.exe --shutdown
