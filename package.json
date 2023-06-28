@@ -1,0 +1,25 @@
+{
+  "name": "ssh-config-cloud",
+  "version": "0.0.1",
+  "description": "Using VitePress to make the kvm / ssh stuff more searchable and easier to use",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "keywords": [
+    "kvm",
+    "ssh",
+    "cloud",
+    "cloud-init",
+    "qemu",
+    "libvirt"
+  ],
+  "author": "hychan48",
+  "license": "GPLv3",
+  "devDependencies": {
+    "vitepress": "1.0.0-beta.3"
+  }
+}
