@@ -8,6 +8,11 @@ wsl.exe --list --verbose
 wsl.exe --distribution Debian --user root
 wsl.exe --distribution Ubuntu-22.04 --user root
 ```
+```powershell [default wsl]
+wsl.exe --setdefault Debian
+debian.exe config --default-user root
+
+```
 ```powershell [misc]
 wsl.exe --distribution Debian --user deb
 wsl.exe --distribution Ubuntu-22.04 --user ubuntu
@@ -17,10 +22,12 @@ wsl.exe --distribution Ubuntu-22.04 --user ubuntu
 ```powershell
 wsl.exe -- tree . -L 1
 ```
+
 <!-- wsl.exe -e tree .
 wsl.exe -e tree . -L 1
 wsl.exe -- tree . -->
 :::details
+* inside of wsl... with fish / zsh you'l get color...
 ```powershell
 -- exec, -e <CommandLine> Execute without $SHELL
 -- Pass the remaining command line as is.
