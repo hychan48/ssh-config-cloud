@@ -15,13 +15,21 @@ export default defineConfig({
     ],
 
     sidebar: [
+      //try plugin again todo
       {
         text: 'Examples',
         items: [
           { text: 'Markdown Examples', link: '/markdown-examples' },
           { text: 'Runtime API Examples', link: '/api-examples' }
         ]
-      }
+      },
+            {
+        text: 'WSL',
+        items: [
+          { text: 'WSL', link: '/wsl/index' },
+        ]
+      },
+
     ],
 
     //add better search. https://vitepress.dev/reference/default-theme-search#local-search
