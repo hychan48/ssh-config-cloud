@@ -1,7 +1,10 @@
 ---
 editLink: true #requires config
 lastUpdated: true
-
+outline: deep
+tmp: <<< C:\Users\Jason\VSCodeProjects\ssh-config-cloud\src\kvm\network\dhcp-cleanup.sh
+tmpraw: C:\Users\Jason\VSCodeProjects\ssh-config-cloud\src\kvm\network\dhcp-cleanup.sh
+tmpcvt: c:/Users/Jason/VSCodeProjects/ssh-config-cloud/src/kvm/network/dhcp-cleanup.sh
 ---
 <script setup>
 import {withBase} from 'vitepress'
@@ -12,15 +15,54 @@ console.log(process.env.HOME);
 // import helloWorld from "process.env.HOME/VSCodeProjects/ssh-config-cloud/docs/src/components/hello-world.vue"
 
 </script>
+
+<!--
 ```js-vue
 process.env.VITE_HOME
 process.env.VITEPRESS_HOME
 ```
 process.env.VITE_HOME
 process.env.VITEPRESS_HOME
-
+-->
 # Developer Notes
 <helloWorld />
+
+## Import
+
+[//]: # ({{ $frontmatter.tmp}})
+
+[//]: # (<<< {{ $frontmatter.tmp}})
+
+[//]: # (<<< @/../src/ssh/ssh-docs.sh)
+:::raw [this block works]
+
+[//]: # (<<< {{$frontmatter.tmpcvt}})
+[//]: # (<<< $frontmatter.tmpcvt)
+:::
+
+<!--::: tip
+You can also prefix the markdown path with @, it will act as the source root. By default, it's the VitePress project root, unless srcDir is configured.
+:::-->
+
+[//]: # (<<< @/../src/ssh/ssh-docs.sh)
+<< #tmp/src/ssh/ssh-docs.sh
+[//]: # ({{ $params }} //route)
+`@ means docs/src`
+
+* without touching package.json
+
+[//]: # (todo add ui / update their docs)
+::: code-group
+<<< ../../src/ssh/ssh-docs.sh [__dirname]
+<<< C:\Users\Jason\VSCodeProjects\ssh-config-cloud\src\cloud-init-netplan\99-kvm-netplan.yaml [abs]
+```txt [ssh-docs ]
+<<< @/ssh/ssh-docs.sh
+```
+<<< @/ssh/ssh-docs.sh [@/ssh/ssh-docs.sh]
+
+<<< @/../src/ssh/ssh-docs.sh [@/../src/ssh/ssh-docs.sh]
+
+:::
 
 :::code-group
 ```js-vue [js-vue]
@@ -48,23 +90,26 @@ import helloWorld from "#docs/src/components/hello-world.vue"
 import helloWorld from "$HOME/Projects/ssh-config-cloud/docs/src/components/hello-world.vue"
 import helloWorld from "%HOME%/VSCodeProjects/ssh-config-cloud/docs/src/components/hello-world.vue"
 import helloWorld from "$Env:HOME/VSCodeProjects/ssh-config-cloud/docs/src/components/hello-world.vue"
+// <<< @withBase("/ssh/index/")
+// <<< {{ $frontmatter.tmp}}
+
 ```
 
 :::
 
-
-
-::: tip
-You can also prefix the markdown path with @, it will act as the source root. By default, it's the VitePress project root, unless srcDir is configured.
-
-`@ means docs/src`
-:::
-
+### Wrong
 ```md
 <<< @/snippets/snippet-with-region.js#snippet{1,2 ts:line-numbers} [snippet with region]
 withBase("/ssh/index/")
-```
+
+<<< #dsrc/ssh/ssh-docs.sh
 <<< @withBase("/ssh/index/")
+```
+<<< {{withBase("/ssh/ssh-docs.sh")}}
+
+
+
+
 ## raw
 
 ::: raw
@@ -133,7 +178,7 @@ const vite = {
 };
 ```
 ```js
-const package = { /* node sub paths */
+const package = { /* package.json node sub paths */
     "imports": {
     "##/*": {
       "default": "./*"
@@ -216,3 +261,7 @@ pnpm add vue -D
 
 ## Markdown-it
 * todo
+### frontmatter
+```yaml
+outline: deep
+```

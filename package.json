@@ -24,5 +24,8 @@
     "gh-pages": "^5.0.0",
     "vitepress": "1.0.0-beta.3",
     "vue": "^3.3.4"
+  },
+  "#tmp/*": {
+    "default": "./docs/*"
   }
 }
