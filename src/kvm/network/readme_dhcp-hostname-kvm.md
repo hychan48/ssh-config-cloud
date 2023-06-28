@@ -1,4 +1,16 @@
 # DHCP Hostname for KVM
+
+# Best way to test xml DNS
+* libvirt dns only no dnsmasq or bind
+```bash
+# destroy / start
+systemctl restart systemd-resolved
+# * dhcp-cleanup.sh
+
+dig +short myhost @192.168.122.1
+```
+
+
 * default kvm
 
 ## test
@@ -7,6 +19,12 @@
 2. Try adding localhostname for nat only
 
 ```bash
+rm /var/lib/libvirt/dnsmasq/virbr0*
+virsh net-destroy default
+
+# stop
+
+virsh net-start default
 
 ```
 
@@ -116,6 +134,7 @@ vmn="ubh1-1";(virsh domifaddr "$vmn" | awk '/ipv4/ {print $4}' | awk -F'/' '{pri
 ## virsh net-edit default
 * og
 ```xml
+<!-- <network connections='4'> -->
 <network>
   <name>default</name>
   <uuid>b23fa676-61df-412d-b621-75e60472bfa3</uuid>
@@ -129,6 +148,75 @@ vmn="ubh1-1";(virsh domifaddr "$vmn" | awk '/ipv4/ {print $4}' | awk -F'/' '{pri
   </ip>
 </network>
 ```
+```bash
+
+```
+```xml
+<!-- Only adding domain witout dns . works! dns -->
+<!-- https://liquidat.wordpress.com/2017/03/03/howto-automated-dns-resolution-for-kvmlibvirt-guests-with-a-local-domain/ -->
+<!-- https://libvirt.org/formatnetwork.html#id10 -->
+<network>
+  <name>default</name>
+  <uuid>b23fa676-61df-412d-b621-75e60472bfa3</uuid>
+  <forward mode='nat'/>
+  <bridge name='virbr0' stp='on' delay='0'/>
+  <mac address='52:54:00:e3:06:b6'/>
+  <domain name="hpe1.localdomain"/>
+  <ip address='192.168.122.1' netmask='255.255.255.0'>
+    <dhcp>
+      <range start='192.168.122.2' end='192.168.122.254'/>
+    </dhcp>
+  </ip>
+</network>
+```
+```xml
+<network>
+  <name>default</name>
+  <uuid>b23fa676-61df-412d-b621-75e60472bfa3</uuid>
+  <forward mode='nat'/>
+  <bridge name='virbr0' stp='on' delay='0'/>
+  <mac address='52:54:00:e3:06:b6'/>
+  <domain name="hpe1.localdomain"/>
+  <dns>
+  <!-- defn works... might be better just to do it inside of the dhcp ?
+  has to be ? might need to add enabled no to dns
+  -->
+    <host ip='192.168.122.1'>
+      <hostname>myhost</hostname>
+      <hostname>myhostalias</hostname>
+      <hostname>kvmhost</hostname>
+      <hostname>kvm.hpe1.localdomain</hostname>
+      <hostname>hpe-01.amd.com</hostname>
+    </host>
+  </dns>
+  <ip address='192.168.122.1' netmask='255.255.255.0'>
+    <dhcp>
+      <range start='192.168.122.2' end='192.168.122.254'/>
+    </dhcp>
+  </ip>
+</network>
+```
+```xml
+<!-- https://libvirt.org/formatnetwork.html -->
+<!-- localPtr in ip might be useful as well -->
+<domain name="example.com"/>
+<dns>
+  <txt name="example" value="example value"/>
+  <forwarder addr="8.8.8.8"/>
+  <forwarder domain='example.com' addr="8.8.4.4"/>
+  <forwarder domain='www.example.com'/>
+  <srv service='name' protocol='tcp' domain='test-domain-name' target='.'
+    port='1024' priority='10' weight='10'/>
+  <host ip='192.168.122.2'>
+    <hostname>myhost</hostname>
+    <hostname>myhostalias</hostname>
+  </host>
+</dns>
+<ip address="192.168.122.1" netmask="255.255.255.0" localPtr="yes">
+</ip>
+```
+
+
 ## Macs
 * `cat /var/lib/libvirt/dnsmasq/virbr0.macs`
  # comes back on vm start

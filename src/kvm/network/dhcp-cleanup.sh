@@ -8,15 +8,56 @@ tree /var/lib/libvirt/dnsmasq/
 cat /var/lib/libvirt/dnsmasq/virbr0.macs # comes back on vm start
 cat /var/lib/libvirt/dnsmasq/virbr0.status # updates when net-start
 rm /var/lib/libvirt/dnsmasq/virbr0*
-virsh net-dhcp-leases default # totally misalligned...
 
-virsh net-destroy --network default
+virsh net-dhcp-leases default # totally misalligned...
+virsh net-define --file default.xml # not net-create
+virsh net-undefine --network default # destroys, wont work if transiet. i.e net-create only for define
+
+virsh net-destroy --network default # stops
+virsh net-start default
+
+virsh shutdown ubh1-1
+virsh start ubh1-1
+
 virsh net-start --network default
 virsh net-dhcp-leases default
+dig hpe-01.hpe1.localdomain +short # 127.0.1.1, which is what i hardcoded
+dig +short ubh1-1.hpe1.localdomain @192.168.122.1
+dig +short ubh1-1.hpe1.localdomain
+dig ubh1-1.hpe1.localdomain
 
+systemctl restart systemd-resolved
+resolvectl status virbr0
+resolvectl status eno1
+
+
+dig +short myhost @192.168.122.1
+dig +short myhost.hpe1.localdomain @192.168.122.1
+dig +short myhostalias.hpe1.localdomain @192.168.122.1
+dig +short kvmhost.hpe1.localdomain @192.168.122.1
+dig +short kvm.hpe1.localdomain @192.168.122.1
+dig +short hpe-01.amd.com @192.168.122.1 #
+
+tree /etc/systemd/network -L 2
+cat /etc/systemd/resolved.conf
+
+# sample...
+## backup bfore changing / trying anything
+sudo systemd-resolve --interface wlp2s0 --set-dns 192.168.88.22 --set-domain yourdomain.local
+# localOnly: yes is for something else
+# find resolvectl settings
+
+
+# https://github.com/systemd/systemd/issues/18761
+
+virsh net-list --all
+virsh net-dumpxml default
+
+virsh net-create --file default.xml # name inside of xml.. so careful
 # nano - can add hostname here...
 # kvm will always python dependency... especially with virt-manager
-virsh net-edit default
+EDITOR=tee virsh net-edit default # use tee? might as well just re-create it
+# virsh net-edit default
 :`
 <network />
 `
