@@ -9,7 +9,7 @@ hero:
   actions:
     - theme: brand
       text: WSL
-      link: /WSL/
+      link: /wsl/
     - theme: alt
       text: VitePress Docs
       link: /vitePress/

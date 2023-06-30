@@ -8,10 +8,17 @@ wsl.exe --list --verbose
 wsl.exe --distribution Debian --user root
 wsl.exe --distribution Ubuntu-22.04 --user root
 ```
-```powershell [default wsl]
+```powershell [default debian]
 wsl.exe --setdefault Debian
 debian.exe config --default-user root
-
+```
+```powershell [default ub2204]
+wsl.exe --setdefault Ubuntu22.04
+ubuntu2204.exe config --default-user ubuntu
+```
+```powershell [default ub2004]
+wsl.exe --setdefault Ubuntu20.04
+ubuntu2004.exe config --default-user ubuntu
 ```
 ```powershell [misc]
 wsl.exe --distribution Debian --user deb
