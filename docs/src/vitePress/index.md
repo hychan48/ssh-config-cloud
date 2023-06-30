@@ -42,7 +42,12 @@ process.env.VITEPRESS_HOME
 
 <!--::: tip
 You can also prefix the markdown path with @, it will act as the source root. By default, it's the VitePress project root, unless srcDir is configured.
+for src/docs/.vitepress:
 :::-->
+
+```txt [@../..]
+<<< @../../../src/kvm/utils/inject_ssh_keys.sh {bash} [inject_ssh_keys.sh]
+```
 
 [//]: # (<<< @/../src/ssh/ssh-docs.sh)
 << #tmp/src/ssh/ssh-docs.sh

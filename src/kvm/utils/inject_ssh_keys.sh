@@ -1,6 +1,6 @@
 #!/bin/bash
 # on host / local machine
-# it defautls to ~/.ssh/id_ed25519...
+# it defaults to ~/.ssh/id_ed25519...
 # set batch mode
 # set +e
 set -e
