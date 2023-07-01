@@ -116,5 +116,32 @@ netsh.exe winsock reset # get stuck sometimes
 ```
 
 ## NT to wsl.exe Posix Mount Path
+
+[//]: # (todo)
 * [win32-posix-path util](https://codeforwings.github.io/nuxt3-win32-posix-path/)
 * cygwin
+
+::: code-group
+
+```powershell
+"lib/dist/bins/index-win.exe" C:\Users\Public\Documents
+```
+```bash
+#!/usr/bin/env fish
+# cd lib/dist/bins
+./index-linux "C:\Users\Public\Documents"
+./index-linux 'C:\Users\Public\Documents'
+#./index-linux C:\Users\Public\Documents # will not work!
+```
+:::
+
+```powershell
+npm -g i pkg
+pkg lib/dist/index.js --out-path lib/dist/bins
+```
+```js
+const args = process.argv;
+const [ 'node.exe','filename.js', ...rest ] = args;
+```
+
+## Util Alias
