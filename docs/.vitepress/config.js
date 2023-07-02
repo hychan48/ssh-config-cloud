@@ -47,6 +47,7 @@ export default defineConfig({
         text: 'SSH',
         items: [
           { text: 'SSH', link: '/ssh/index' },
+          { text: 'Rsync', link: '/ssh/readme_scp_rsync' },
         ]
       },
       {

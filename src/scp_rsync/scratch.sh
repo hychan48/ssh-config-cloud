@@ -1,5 +1,6 @@
 #!/bin/zsh
 # Initialize Folders
+# readme_scp_rsync.md
 function InitializeDummyFolders(){
     mkdir -p ~/a/a1/a2/a3
     # mkdir -p ~/b/b1/b2/b3

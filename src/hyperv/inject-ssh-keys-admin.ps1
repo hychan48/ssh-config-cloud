@@ -15,8 +15,8 @@ param (
     [string]$PUB_KEY = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG8YNDTSq1BTAA4KFPowIyPGbpwLKtli9Iyk6nyrM4vF jason@DESKTOP-2FU8K8O",
 
     [Parameter(Mandatory = $false)]
-    # [string]$AUTH_KEY_FILE = "C:\ProgramData\ssh\administrators_authorized_keys"
-    [string]$AUTH_KEY_FILE = "~/temp/administrators_authorized_keys"
+     [string]$AUTH_KEY_FILE = "C:\ProgramData\ssh\administrators_authorized_keys"
+#    [string]$AUTH_KEY_FILE = "~/temp/administrators_authorized_keys"
 )
 # $PUB_KEY="ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG8YNDTSq1BTAA4KFPowIyPGbpwLKtli9Iyk6nyrM4vF jason@DESKTOP-2FU8K8O"
 # $PUB_KEY="ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEof8LQutxzVOAbX8gKE0ut+ueWmjMCIk42oTrDWK1E2 amd\hoyachan@VDIADMINQ1-01"

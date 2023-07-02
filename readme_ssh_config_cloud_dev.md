@@ -47,7 +47,64 @@ chmod -R 600 ~/.ssh/
 ## Install SSH
 [Microsoft's Powershell Instructions](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse?tabs=powershell#install-openssh-for-windows)
 
-```ps1
+:::code-group
+```powershell [pwsh]
+New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" -Name DefaultShell -Value "c:/progra~1/powershell/7/pwsh.exe" -PropertyType String -Force
+```
+```powershell [powershell.exe]
+# works for win10:
+New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" -Name DefaultShell -Value "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -PropertyType String -Force```
+```
+```powershell [powershell.exe]
+# works for win10:
+New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" -Name DefaultShell -Value "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -PropertyType String -Force```
+```
+```powershell [exec-policy.ps1]
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine
+Set-ExecutionPolicy -ExecutionPolicy unrestricted -Scope LocalMachine
+Get-ExecutionPolicy -List
+```
+```txt [scope]
+        Scope ExecutionPolicy
+        ----- ---------------
+MachinePolicy       Undefined
+   UserPolicy       Undefined
+      Process       Undefined
+  CurrentUser    Unrestricted
+ LocalMachine    Unrestricted
+```
+:::
+:::details
+```powershell
+# If Interactive, set prompt to show ssh connection and current directory
+if ($null -ne $Host.UI) {
+    #region conda initialize
+    # conda slows down my powershell way too much though
+    # !! Contents within this block are managed by 'conda init' !!
+    # If (Test-Path "C:\ProgramData\mambaforge\Scripts\conda.exe") {
+    #   (& "C:\ProgramData\mambaforge\Scripts\conda.exe" "shell.powershell" "hook") | Out-String | ?{$_} | Invoke-Expression
+    # }
+    #endregion
+    Import-Module PSReadLine
+    function prompt{
+        $cwd = $executionContext.SessionState.Path.CurrentLocation
+        $ssh = ""
+
+        if ($env:SSH_CONNECTION) {
+            $ssh = "ssh://"
+        }
+        Write-Host "# $ssh$Env:Username@$env:COMPUTERNAME" -ForegroundColor DarkGray
+        Write-Host "# $cwd" -ForegroundColor DarkGray
+        Write-Host $env:CONDA_PROMPT_MODIFIER"PS >" -ForegroundColor DarkGreen -NoNewline
+        # Write-Host "PS >" -ForegroundColor DarkGreen -NoNewline
+        Write-Host $('' * ($nestedPromptLevel + 1)) -ForegroundColor DarkGray -NoNewline
+        return " "
+    }
+}
+
+```
+:::
+```powershell
 # Manually
 # https://github.com/PowerShell/Win32-OpenSSH/releases/latest
 # Download msi and run then run firewall rules. i.e.
