@@ -1,0 +1,1 @@
+import{_ as s,o as a,c as l,V as n}from"./chunks/framework.f2b6412b.js";const d=JSON.parse('{"title":"WSL 2","description":"","frontmatter":{},"headers":[],"relativePath":"wsl/index.md","filePath":"wsl/index.md"}'),e={name:"wsl/index.md"},o=n("",23),p=[o];function t(c,r,i,y,D,C){return a(),l("div",null,p)}const F=s(e,[["render",t]]);export{d as __pageData,F as default};
