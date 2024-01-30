@@ -61,8 +61,11 @@ rsync -avP --rsync-path='wsl rsync' <file_to_send> <username>@<host_ip>:<path>
 # https://superuser.com/questions/1734844/cygwin-rsync-cannot-run-outside-of-cygwin-terminal
 C:\Cygwin\bin\rsync.exe -e "C:\Cygwin\bin\ssh.exe" source_file destination.
 
-
+# interesting... maybe because i do not have it?
+ls c:/cygwin64/bin/ssh.exe
 ```
+* vite-press-docs.git/ pwsh-alias-exp.ps1
+* docs_readme_cygwin.md
 :::
 
 ## Test Environment

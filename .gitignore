@@ -4,3 +4,4 @@ src/debug_utils/vnc/scratch.ahk
 /docs/.vitepress/cache/
 /docs/.vitepress/dist/
 /node_modules/
+.idea/
