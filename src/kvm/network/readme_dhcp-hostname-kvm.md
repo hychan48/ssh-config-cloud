@@ -219,7 +219,7 @@ vmn="ubh1-1";(virsh domifaddr "$vmn" | awk '/ipv4/ {print $4}' | awk -F'/' '{pri
 
 ## Macs
 * `cat /var/lib/libvirt/dnsmasq/virbr0.macs`
- # comes back on vm start
+ * comes back on vm start
 * check if virsh net-destroy clears these
 ```jsonc
 [
