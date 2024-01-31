@@ -7,6 +7,16 @@ Notes and templates for using SSH Config. KVM &amp; Hyper-V host to Windows &amp
 <!-- need to add in the content slowly, too much content -->
 
 
+# Basic Inject
+## Debian / Ubuntu
+```bash
+# list
+# grep line after id
+curl -L https://api.github.com/users/hychan48/keys
+
+```
+
+
 # General Provisioning
 * Hostname / Computer Name / VM Name
 1. User Accounts

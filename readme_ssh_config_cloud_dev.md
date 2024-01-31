@@ -236,3 +236,38 @@ virt-sysprep
 * try tmr and see
 * im going to guess... using sysprep. before cloning might make sense...
 * 
+
+
+# Basic Setup
+```bash
+# list
+# grep line after id
+apt 
+curl -L https://api.github.com/users/hychan48/keys
+
+```
+
+# Github api
+* https://docs.github.com/en/rest/users/keys?apiVersion=2022-11-28#get-a-public-ssh-key-for-the-authenticated-user
+```bash
+curl -L \
+  -H "Accept: application/vnd.github+json" \
+  -H "Authorization: Bearer <YOUR-TOKEN>" \
+  -H "X-GitHub-Api-Version: 2022-11-28" \
+  https://api.github.com/user/keys/KEY_ID
+
+
+curl -L \
+  -H "Accept: application/vnd.github+json" \
+  -H "Authorization: Bearer <YOUR-TOKEN>" \
+  -H "X-GitHub-Api-Version: 2022-11-28" \
+  https://api.github.com/users/USERNAME/keys
+
+# list
+curl -L https://api.github.com/users/hychan48/keys
+## single from id
+curl -L https://api.github.com/user/keys/86973363 # requires auth... interesting... so odd
+
+
+
+```
