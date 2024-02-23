@@ -287,3 +287,40 @@ vmn="ubh1-1";(virsh domifaddr "$vmn" | awk '/ipv4/ {print $4}' | awk -F'/' '{pri
   }
 ]
 ```
+
+
+# dns check
+```bash
+# dnssec
+dig +dnssec example.com
+dig +short com. DNSKEY @<nameserver-ip>
+kdig @<nameserver-ip> +tls-ca +tls-host=<hostname> example.com
+kdig "@8.8.8.8" +tls-ca +tls-host=<hostname> example.com
+# kdig +tls-ca +tls-host=dns.google example.com
+kdig "@8.8.8.8" +tls-ca +tls-host=dns.google example.com
+kdig "@8.8.8.8" +tls-ca +tls-host=dns.google example.com +short # works not sure how to actually test
+kdig example.com +short # same
+sudo apt-get update
+sudo apt-get install knot-dnsutils -y
+
+# kdig
+cat /etc/resolv.conf
+
+# For DNS over TLS (DoT), you can configure your client to connect to the hostname dns.google on port 853.
+# For DNS over HTTPS (DoH), you would use the URL https://dns.google/dns-query for the queries.
+sudo apt install dnscrypt-proxy
+
+
+
+sudo sudo systemd-resolve --status
+
+# lying sack of shit gpt1
+gsudo
+netsh.exe interface ip show config
+netsh.exe interface dns show dhcp
+netsh.exe interface ip show dns
+netsh.exe interface ip show dns
+netsh.exe interface ip show dnsserver
+netsh.exe interface ip show dhcp
+
+```
