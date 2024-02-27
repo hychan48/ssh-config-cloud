@@ -1,3 +1,4 @@
+#Requires AutoHotkey v2.0
 ; ./realvnc_toggle.dev.ahk
 
 /* 
@@ -29,11 +30,12 @@ ahk_exe vncviewer.exe
 
 needs ADMIN
 */
-#Requires AutoHotkey v2.0
+
 #SingleInstance force
 if not A_IsAdmin{
 	; Run *RunAs "%A_ScriptFullPath%" ;
     tooltip 'Run as admin'
+    msgbox 'Run as admin'
     sleep 300
     ExitApp
 }
@@ -45,9 +47,10 @@ Persistent 1
 ; ctrl + alt + shift + r
 ; <!^+r::toggleVncViewer()
 <!<^<+r::toggleVncViewer() ; this works. i was typing wrong key combo
-F1::toggleVncViewer() ; this works...
-F3::Reload ; this works...
-F4::ExitApp ;
+; should be smarter maybe - and use appium?
+; F1::toggleVncViewer() ; this works...
+; F3::Reload ; this works...
+; F4::ExitApp ;
 return
 toggleVncViewer(){
     Tooltip ""
